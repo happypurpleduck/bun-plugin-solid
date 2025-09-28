@@ -1,0 +1,31 @@
+{
+    "name": "@purpleduck/bun-plugin-solid",
+    "version": "0.0.0",
+    "description": "A Bun plugin that enables Solid.js support with hot reloading",
+    "type": "module",
+    "module": "./src/bun-plugin-solid.ts",
+    "exports": {
+        ".": "./src/bun-plugin-solid.ts",
+        "./*": "./src/*"
+    },
+    "keywords": [
+        "bun",
+        "solid-js",
+        "plugin",
+        "jsx",
+        "tsx",
+        "hot-reload"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "@types/babel__core": "^7.20.5"
+    },
+    "peerDependencies": {
+        "@types/bun": "^1.2.23",
+        "typescript": "^5",
+        "solid-refresh": "^0.7.5",
+        "@babel/core": "^7.28.4",
+        "@babel/preset-typescript": "^7.27.1",
+        "babel-preset-solid": "^1.9.9"
+    }
+}

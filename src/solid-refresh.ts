@@ -326,19 +326,23 @@ export function $$decline(...[type, inline]: Decline) {
             // decline should be better
             if (inline) {
                 // @ts-expect-error not implemented in bun
-                import.meta.hot.invalidate?.();
+                import.meta.hot.invalidate();
             }
             break;
         }
         case "vite": {
             // Vite is no-op on decline, just call invalidate
             if (inline) {
-                // @ts-expect-error not implemented in bun
-                import.meta.hot.invalidate?.();
+                try {
+                    // @ts-expect-error not implemented in bun, and will throw an error.
+                    import.meta.hot.invalidate();
+                } catch (error) {
+                    console.warn(error);
+                }
             } else {
                 import.meta.hot.accept(() => {
                     // @ts-expect-error not implemented in bun
-                    import.meta.hot.invalidate?.();
+                    import.meta.hot.invalidate();
                 });
             }
             break;
@@ -359,7 +363,7 @@ export function $$decline(...[type, inline]: Decline) {
                 // @ts-expect-error not implemented in bun
                 if (import.meta.hot.invalidate) {
                     // @ts-expect-error not implemented in bun
-                    import.meta.hot.invalidate?.();
+                    import.meta.hot.invalidate();
                 } else {
                     window.location.reload();
                 }
@@ -371,7 +375,7 @@ export function $$decline(...[type, inline]: Decline) {
                     // @ts-expect-error not implemented in bun
                     if (import.meta.hot.invalidate) {
                         // @ts-expect-error not implemented in bun
-                        import.meta.hot.invalidate?.();
+                        import.meta.hot.invalidate();
                     } else {
                         window.location.reload();
                     }
@@ -416,8 +420,12 @@ function $$refreshESM(type: ESMRuntimeType, registry: Registry) {
                     import.meta.hot.data[SOLID_REFRESH_PREV],
                 )
             ) {
-                // @ts-expect-error not implemented in bun
-                import.meta.hot.invalidate?.();
+                try {
+                    // @ts-expect-error not implemented in bun
+                    import.meta.hot.invalidate();
+                } catch (error) {
+                    console.warn(error);
+                }
             }
         });
     } else {
